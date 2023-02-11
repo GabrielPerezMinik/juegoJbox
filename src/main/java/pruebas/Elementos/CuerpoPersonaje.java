@@ -7,11 +7,16 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import pruebas.Elementos.animations.AnimacionV3;
+import pruebas.Elementos.animations.Animation;
 
 public class CuerpoPersonaje extends Entity{
 
 	Body bodyF;
+	AnimacionV3 animacion;
 	
 	public CuerpoPersonaje(Game game, float posX, float posY) {
 		super(game);
@@ -44,7 +49,7 @@ public class CuerpoPersonaje extends Entity{
 		
 //		box.setAsBox(x/5f, y/5f);  aqui se vuelve tamaño estandar
 
-		box.setAsBox(x/5f, y/5f); 
+		box.setAsBox(x, y); 
 		
 		//		box.m_radius = 0.5f;  
 
@@ -63,13 +68,20 @@ public class CuerpoPersonaje extends Entity{
 	
 	public void render(GraphicsContext gc) {
 				
-		gc.setFill(Color.BLACK);
+//		gc.setFill(Color.BLACK);
 //		gc.fillOval(x, y, width, height);
+		
+		
+		
 		
 //		gc.fillRect(toPixelPosX(x, width),toPixelPosY(y, height), width, height);
 		
 		gc.fillRect(x, y, width*5f, height*5f);
 		
+		animacion=new AnimacionV3(new  Image("imagen/Idle_Animation42x42x22f.png"),1,23,22,42,42,60);
+		animacion.start();
+		
+		gc.drawImage(animacion.getCurrentFrame(), x, y);
 //		gc.fillRect(x, y, width, height);
 		
 //		System.out.println("la X es : " + x +" la Y es: " + y + "el width es: " + width + "el height es : " + height );

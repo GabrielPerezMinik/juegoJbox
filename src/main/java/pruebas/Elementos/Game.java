@@ -14,7 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import pruebas.Elementos.animations.Animation;
 
 public abstract class Game extends AnimationTimer {
 
@@ -31,6 +35,8 @@ public abstract class Game extends AnimationTimer {
 	private GraphicsContext graphicsContext;
 	private WorldF mundo = new WorldF();
 
+	Animation animacion;
+
 	public Game(Canvas canvas) {
 
 		graphicsContext = canvas.getGraphicsContext2D();
@@ -40,6 +46,8 @@ public abstract class Game extends AnimationTimer {
 		canvas.setFocusTraversable(true);
 		canvas.requestFocus();
 
+		
+		
 		width.bind(canvas.widthProperty());
 		height.bind(canvas.heightProperty());
  
@@ -80,7 +88,9 @@ public abstract class Game extends AnimationTimer {
 	}
 
 	protected void render(GraphicsContext gc) {
-		gc.clearRect(0, 0, getWidth(), getHeight());
+//		gc.clearRect(0, 0, getWidth(), getHeight());
+		gc.setFill(Color.RED);
+		gc.fillRect(0, 0, getWidth(), getHeight());
 		entities.forEach(entity -> entity.render(gc));
 	}
 
@@ -122,7 +132,7 @@ public abstract class Game extends AnimationTimer {
 
 	public final ObservableSet<KeyCode> getInput() {
 		return this.inputProperty().get();
-	}
+	}	
 
 	public WorldF getWorld() {
 		return mundo;
